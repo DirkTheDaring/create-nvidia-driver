@@ -1,0 +1,8 @@
+
+- name: "push image"
+  ansible.builtin.command:
+    argv:
+      - podman
+      - push
+      - "{{ nvidia_driver_registry }}/{{ nvidia_driver_image_name }}"
+

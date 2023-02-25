@@ -1,0 +1,21 @@
+- name: "Build fedora"
+  ansible.builtin.command:
+    chdir: "{{ nvidia_driver_git_folder }}/fedora"
+    argv:
+      - podman
+      - build
+      - --build-arg
+      - TARGETARCH=x86_64
+      - --build-arg
+      - HTTP_PROXY=
+      - --build-arg
+      - HTTPS_PROXY=
+      - --build-arg
+      - DRIVER_VERSION={{ nvidia_driver_version }}
+      - --build-arg
+      - PRIVATE_KEY=
+      - --build-arg
+      - FEDORA_VERSION={{ nvidia_driver_fedora_version }}
+      - --tag 
+      - "{{ nvidia_driver_image_name }}"
+      - .

@@ -1,0 +1,5 @@
+- name: Checkout git repository
+  ansible.builtin.git:
+    repo:    "{{ nvidia_driver_git_repository }}"
+    dest:    "{{ nvidia_driver_git_folder }}"
+    version: "{{ nvidia_driver_git_version }}"

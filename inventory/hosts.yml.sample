@@ -1,0 +1,6 @@
+all:
+  hosts:
+    localhost
+  vars:
+    nvidia_driver_registry: example.com
+

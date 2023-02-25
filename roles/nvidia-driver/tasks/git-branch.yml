@@ -1,0 +1,18 @@
+
+- name: "Create branch"
+  ansible.builtin.command:
+    chdir: "{{ nvidia_driver_git_folder }}"
+    argv:
+      - git
+      - branch
+      - "{{ nvidia_driver_git_branch }}"
+  ignore_errors: True
+
+- name: "Checkout branch"
+  ansible.builtin.command:
+    chdir: "{{ nvidia_driver_git_folder }}"
+    argv:
+      - git
+      - checkout
+      - "{{ nvidia_driver_git_branch }}"
+
