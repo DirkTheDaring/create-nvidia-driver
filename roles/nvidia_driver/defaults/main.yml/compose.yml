@@ -1,0 +1,1 @@
+nvidia_driver_image_name: nvidia/driver:{{ nvidia_driver_version }}-fedora{{ nvidia_driver_fedora_version }}

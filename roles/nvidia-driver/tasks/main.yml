@@ -1,6 +1,0 @@
-- import_tasks: git-checkout.yml
-- import_tasks: git-branch.yml
-- import_tasks: dnf.yml
-- import_tasks: build-fedora.yml
-- import_tasks: tag-fedora.yml
-- import_tasks: push-fedora.yml

@@ -1,8 +1,6 @@
-
-- name: "tag image"
+- name: Push image
   ansible.builtin.command:
     argv:
       - podman
-      - tag
-      - "{{ nvidia_driver_image_name }}"
+      - push
       - "{{ nvidia_driver_registry }}/{{ nvidia_driver_image_name }}"

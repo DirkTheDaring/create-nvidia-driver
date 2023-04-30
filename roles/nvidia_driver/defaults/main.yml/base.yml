@@ -1,8 +1,7 @@
-
-#nvidia_driver_git_repository: https://gitlab.com/zvonkok/driver
+# nvidia_driver_git_repository: https://gitlab.com/zvonkok/driver
 nvidia_driver_git_repository: https://gitlab.com/nvidia/container-images/driver
-nvidia_driver_git_folder:     "{{ playbook_dir }}/driver"
-nvidia_driver_git_version:    "b0377f628a44a5c4e24a31d32a693e85bc35c191"
+nvidia_driver_git_folder: "{{ playbook_dir }}/driver"
+nvidia_driver_git_version: "b0377f628a44a5c4e24a31d32a693e85bc35c191"
 
 # new changes that will be created in this branch
 nvidia_driver_git_branch: "new-features"

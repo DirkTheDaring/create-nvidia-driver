@@ -1,0 +1,12 @@
+- name: Git checkout
+  ansible.builtin.import_tasks: git-checkout.yml
+- name: Git branch
+  ansible.builtin.import_tasks: git-branch.yml
+- name: Install packages
+  ansible.builtin.import_tasks: dnf.yml
+- name: Build fedora
+  ansible.builtin.import_tasks: build-fedora.yml
+- name: Tag fedora
+  ansible.builtin.import_tasks: tag-fedora.yml
+- name: Push fedora
+  ansible.builtin.import_tasks: push-fedora.yml

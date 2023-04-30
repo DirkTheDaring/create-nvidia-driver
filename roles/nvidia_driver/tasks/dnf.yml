@@ -1,8 +1,6 @@
 - name: Install packages
   ansible.builtin.dnf:
     name:
-    - git
-    - podman
-    state: latest
+      - git
+      - podman
   become: true
-

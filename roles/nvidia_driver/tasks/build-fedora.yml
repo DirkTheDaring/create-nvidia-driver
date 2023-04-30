@@ -1,4 +1,4 @@
-- name: "Build fedora"
+- name: Build fedora
   ansible.builtin.command:
     chdir: "{{ nvidia_driver_git_folder }}/fedora"
     argv:
@@ -16,6 +16,6 @@
       - PRIVATE_KEY=
       - --build-arg
       - FEDORA_VERSION={{ nvidia_driver_fedora_version }}
-      - --tag 
+      - --tag
       - "{{ nvidia_driver_image_name }}"
       - .
