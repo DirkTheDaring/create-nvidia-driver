@@ -1,5 +1,6 @@
 ---
-- hosts:
-  - localhost
+- name: Playbook
+  hosts:
+    - localhost
   roles:
-  - nvidia-driver
+    - nvidia_driver
