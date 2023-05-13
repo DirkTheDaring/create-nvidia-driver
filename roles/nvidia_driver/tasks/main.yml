@@ -1,12 +1,14 @@
-- name: Git checkout
-  ansible.builtin.import_tasks: git-checkout.yml
-- name: Git branch
-  ansible.builtin.import_tasks: git-branch.yml
-- name: Install packages
+- name: Insall packages
   ansible.builtin.import_tasks: dnf.yml
-- name: Build fedora
+- name: Checkout repository
+  ansible.builtin.import_tasks: git-checkout.yml
+- name: Branch repository
+  ansible.builtin.import_tasks: git-branch.yml
+- name: Patch repository
+  ansible.builtin.import_tasks: patch.yml
+- name: Build Container
   ansible.builtin.import_tasks: build-fedora.yml
-- name: Tag fedora
+- name: Tag Container
   ansible.builtin.import_tasks: tag-fedora.yml
-- name: Push fedora
+- name: Push Container
   ansible.builtin.import_tasks: push-fedora.yml

@@ -1,0 +1,35 @@
+diff --git a/fedora/nvidia-driver b/fedora/nvidia-driver
+index 80c3f41..919c14f 100755
+--- a/fedora/nvidia-driver
++++ b/fedora/nvidia-driver
+@@ -104,7 +104,7 @@ _install_prerequisites() (
+     fi
+     ln -s /usr/src/kernels/${KERNEL_VERSION} /lib/modules/${KERNEL_VERSION}/build
+ 
+-    echo "Installing Linux kernel module files..."
++    echo "Downloading kernel-core..."
+     if ! dnf -q -y download kernel-core-${KERNEL_VERSION} > /dev/null; then
+         echo "Failed to find kernel-core-${KERNEL_VERSION} in repositories."
+         echo "Trying to download kernel-core from koji..."
+@@ -115,7 +115,21 @@ _install_prerequisites() (
+             exit 1
+         fi
+     fi
++
++    echo "Downloading kernel-modules-core..."
++    if ! dnf -q -y download kernel-modules-core-${KERNEL_VERSION} > /dev/null; then
++        echo "Failed to find kernel-modules-core-${KERNEL_VERSION} in repositories."
++        echo "Trying to download kernel-core from koji..."
++        KOJI_KERNEL_CORE_RPM=$KOJI_BASE_URL/packages/kernel/$KERNEL_RPM_VERSION/$KERNEL_RPM_RELEASE/$KERNEL_RPM_ARCH/kernel-core-$KERNEL_VERSION.rpm
++        if ! dnf -q -y download $KOJI_KERNEL_CORE_RPM; then
++            echo "Can't find kernel-core-${KERNEL_VERSION}"
++            echo "Please try to update your kernel on the host system."
++            exit 1
++        fi
++    fi
++
+     cat ./kernel-core-*.rpm | rpm2cpio | cpio -idm --quiet
++    cat ./kernel-modules-core-*.rpm | rpm2cpio | cpio -idm --quiet
+     rm ./*.rpm
+ 
+     mv lib/modules/${KERNEL_VERSION}/modules.* /lib/modules/${KERNEL_VERSION}

@@ -1,0 +1,8 @@
+- name: Set facts
+  ansible.builtin.set_fact:
+    patch_file: kernel-modules-core.patch
+    git_message: |
+      Fedora 38 has changed where the modules are, so we need to adjust
+
+- name: Apply patch
+  ansible.builtin.include_tasks: apply-patch.yml
