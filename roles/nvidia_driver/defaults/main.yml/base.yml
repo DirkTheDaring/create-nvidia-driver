@@ -6,7 +6,7 @@ nvidia_driver_git_version: "bfb1e854b37556136dfeada6a96fd232b861fdcf"
 # new changes that will be created in this branch
 nvidia_driver_git_branch: "new-features"
 
-nvidia_driver_version: "525.60.13"
+nvidia_driver_version: "525.105.17" # gpu-operator helm chart version: v23.3.2
 nvidia_driver_fedora_version: 38
 
 nvidia_driver_registry: example.com
