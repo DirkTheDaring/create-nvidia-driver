@@ -1,8 +1,35 @@
 diff --git a/fedora/nvidia-driver b/fedora/nvidia-driver
-index 80c3f41..919c14f 100755
+index 80c3f41..3d4f820 100755
 --- a/fedora/nvidia-driver
 +++ b/fedora/nvidia-driver
-@@ -104,7 +104,7 @@ _install_prerequisites() (
+@@ -1,7 +1,7 @@
+ #! /bin/bash
+ # Copyright (c) 2018-2020, NVIDIA CORPORATION. All rights reserved.
+ 
+-set -eu
++#set -eu
+ 
+ RUN_DIR=/run/nvidia
+ PID_FILE=${RUN_DIR}/${0##*/}.pid
+@@ -81,7 +81,7 @@ _install_prerequisites() (
+     if ! dnf -q -y install kernel-headers-${KERNEL_VERSION} > /dev/null; then
+         echo "Failed to find kernel-headers-${KERNEL_VERSION} in repositories."
+         echo "Trying to download kernel-headers from koji..."
+-        KOJI_KERNEL_HEADERS_RPM=$KOJI_BASE_URL/packages/kernel-headers/$KERNEL_RPM_VERSION/$KERNEL_RPM_RELEASE/$KERNEL_RPM_ARCH/kernel-headers-$KERNEL_VERSION.rpm
++        KOJI_KERNEL_HEADERS_RPM=$KOJI_BASE_URL/packages/kernel-headers/$KERNEL_RPM_VERSION/$KERNEL_RPM_RELEASE/$KERNEL_RPM_ARCH/kernel-headers-$KERNEL_RPM_VERSION-$KERNEL_RPM_RELEASE.$KERNEL_RPM_ARCH.rpm
+         if ! dnf -q -y install $KOJI_KERNEL_HEADERS_RPM \
+           --setopt=install_weak_deps=False; then
+             echo "Failed to find kernel-headers-${KERNEL_VERSION} in koji."
+@@ -94,7 +94,7 @@ _install_prerequisites() (
+     if ! dnf -q -y install kernel-devel-${KERNEL_VERSION} > /dev/null; then
+         echo "Failed to find kernel-devel-${KERNEL_VERSION} in repositories."
+         echo "Trying to download kernel-devel from koji..."
+-        KOJI_KERNEL_DEVEL_RPM=$KOJI_BASE_URL/packages/kernel/$KERNEL_RPM_VERSION/$KERNEL_RPM_RELEASE/$KERNEL_RPM_ARCH/kernel-devel-$KERNEL_VERSION.rpm
++        KOJI_KERNEL_DEVEL_RPM=$KOJI_BASE_URL/packages/kernel/$KERNEL_RPM_VERSION/$KERNEL_RPM_RELEASE/$KERNEL_RPM_ARCH/kernel-devel-$KERNEL_RPM_VERSION-$KERNEL_RPM_RELEASE.$KERNEL_RPM_ARCH.rpm
+         if ! dnf -q -y install $KOJI_KERNEL_DEVEL_RPM \
+           --setopt=install_weak_deps=False; then
+             echo "Can't find kernel-devel-${KERNEL_VERSION}"
+@@ -104,18 +104,32 @@ _install_prerequisites() (
      fi
      ln -s /usr/src/kernels/${KERNEL_VERSION} /lib/modules/${KERNEL_VERSION}/build
  
@@ -11,7 +38,12 @@ index 80c3f41..919c14f 100755
      if ! dnf -q -y download kernel-core-${KERNEL_VERSION} > /dev/null; then
          echo "Failed to find kernel-core-${KERNEL_VERSION} in repositories."
          echo "Trying to download kernel-core from koji..."
-@@ -115,7 +115,21 @@ _install_prerequisites() (
+-        KOJI_KERNEL_CORE_RPM=$KOJI_BASE_URL/packages/kernel/$KERNEL_RPM_VERSION/$KERNEL_RPM_RELEASE/$KERNEL_RPM_ARCH/kernel-core-$KERNEL_VERSION.rpm
++        KOJI_KERNEL_CORE_RPM=$KOJI_BASE_URL/packages/kernel/$KERNEL_RPM_VERSION/$KERNEL_RPM_RELEASE/$KERNEL_RPM_ARCH/kernel-core-$KERNEL_RPM_VERSION-$KERNEL_RPM_RELEASE.$KERNEL_RPM_ARCH.rpm
+         if ! dnf -q -y download $KOJI_KERNEL_CORE_RPM; then
+-            echo "Can't find kernel-core-${KERNEL_VERSION}"
++            echo "Can't find kernel-core-${KERNEL_VERSION} ($KOJ_KERNEL_CORE_RPM)"
+             echo "Please try to update your kernel on the host system."
              exit 1
          fi
      fi
@@ -20,9 +52,9 @@ index 80c3f41..919c14f 100755
 +    if ! dnf -q -y download kernel-modules-core-${KERNEL_VERSION} > /dev/null; then
 +        echo "Failed to find kernel-modules-core-${KERNEL_VERSION} in repositories."
 +        echo "Trying to download kernel-core from koji..."
-+        KOJI_KERNEL_CORE_RPM=$KOJI_BASE_URL/packages/kernel/$KERNEL_RPM_VERSION/$KERNEL_RPM_RELEASE/$KERNEL_RPM_ARCH/kernel-core-$KERNEL_VERSION.rpm
++        KOJI_KERNEL_CORE_RPM=$KOJI_BASE_URL/packages/kernel/$KERNEL_RPM_VERSION/$KERNEL_RPM_RELEASE/$KERNEL_RPM_ARCH/kernel-core-$KERNEL_RPM_VERSION-$KERNEL_RPM_RELEASE.$KERNEL_RPM_ARCH.rpm
 +        if ! dnf -q -y download $KOJI_KERNEL_CORE_RPM; then
-+            echo "Can't find kernel-core-${KERNEL_VERSION}"
++            echo "Can't find kernel-core-${KERNEL_VERSION} ($KOJI_KERNEL_CORE_RPM)"
 +            echo "Please try to update your kernel on the host system."
 +            exit 1
 +        fi
