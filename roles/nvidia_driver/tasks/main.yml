@@ -1,4 +1,4 @@
-- name: Insall packages
+- name: Install packages
   ansible.builtin.import_tasks: dnf.yml
 - name: Checkout repository
   ansible.builtin.import_tasks: git-checkout.yml
